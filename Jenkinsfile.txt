@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from Git
+                git 'https://github.com/your-username/my-project.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Build the project using Maven
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run tests (if any)
+                sh 'mvn test'
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                // Archive the build artifacts
+                archiveArtifacts 'target/*.jar'
+            }
+        }
+    }
+}
